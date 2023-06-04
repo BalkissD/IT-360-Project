@@ -76,7 +76,8 @@ def get_encryption_keys():
 # Function to save keys and encryption history to a JSON file
 def save_data(data):
     with open('data.json', 'w') as f:
-        json.dump(data, f)
+        json.dump(data, f, indent=4)
+
 
 # Function to load keys and encryption history from the JSON file
 def load_data():
@@ -152,6 +153,7 @@ def open_admin_window():
         save_data(data)
 
     admin_window.protocol('WM_DELETE_WINDOW', save_data_on_close)
+
 
 # Function to handle button click
 def handle_click():
