@@ -67,10 +67,11 @@ def get_encryption_keys():
         if os.path.isfile(key_path):
             with open(key_path, 'rb') as f:
                 key = f.read()
-            keys[file_name] = key
+            keys[file_name] = key.decode()
         else:
             keys[file_name] = 'N/A'
     return keys
+
 
 # Function to save keys and encryption history to a JSON file
 def save_data(data):
@@ -83,8 +84,9 @@ def load_data():
         with open('data.json', 'r') as f:
             data = json.load(f)
             return data
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError):
         return {}
+
 
 # Function to open the login window
 def open_login_window():
@@ -189,10 +191,11 @@ def open_file_location():
 # Function to open the admin login window
 def open_admin_login_window():
     open_login_window()
+    #By having the open_admin_login_window() function, we can separate the logic of opening the admin login window from the main application window. 
 
 # Main application window
 root = tk.Tk()
-root.geometry('500x500')
+root.geometry('600x600')
 root.title('File Encryption, Decryption and Hashing Application')
 
 # Label
